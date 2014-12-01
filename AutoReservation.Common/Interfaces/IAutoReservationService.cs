@@ -6,9 +6,9 @@ namespace AutoReservation.Common.Interfaces
 {
     public interface IAutoReservationService
     {
-        void UpdateAuto(AutoDto changed, AutoDto old);
-        void UpdateKunde(KundeDto changed, KundeDto old);
-        void UpdateReservation(ReservationDto changed, ReservationDto old);
+        void UpdateAuto(AutoDto modified, AutoDto original);
+        void UpdateKunde(KundeDto modified, KundeDto original);
+        void UpdateReservation(ReservationDto modified, ReservationDto original);
 
         AutoDto insertAuto(AutoDto auto);
         KundeDto insertKunde(KundeDto kunde);
