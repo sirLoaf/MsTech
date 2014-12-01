@@ -90,7 +90,7 @@ namespace AutoReservation.Common.DataTransferObjects
             {
                 error.AppendLine("- tagestarif muss grösser als 0 sein.");
             }
-            if (autoklasse == AutoKlasse.LuxusKlasse && basistarif <= 0)
+            if (autoklasse == AutoKlasse.Luxusklasse && basistarif <= 0)
             {
                 error.AppendLine("- basistarif eines luxusautos muss grösser als 0 sein.");
             }
