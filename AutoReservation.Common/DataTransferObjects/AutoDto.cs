@@ -13,6 +13,7 @@ namespace AutoReservation.Common.DataTransferObjects
         private int tagestarif;
         private AutoKlasse autoklasse;
 
+        [DataMember]
         public int Basistarif
         {
             get { return basistarif; }
@@ -25,7 +26,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
-
+        [DataMember]
 		public int Id 
         { 
             get { return id; } 
@@ -37,8 +38,8 @@ namespace AutoReservation.Common.DataTransferObjects
                     RaisePropertyChanged(); 
                 } 
             } 
-        }           
-        
+        }
+        [DataMember]
         public string Marke 
         { 
             get { return marke; } 
@@ -50,8 +51,8 @@ namespace AutoReservation.Common.DataTransferObjects
                     RaisePropertyChanged();
                 } 
             } 
-        }           
-        
+        }
+        [DataMember]
         public int Tagestarif 
         { 
             get { return tagestarif; } 
@@ -64,7 +65,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 } 
             } 
         }
-        
+        [DataMember]
         public AutoKlasse AutoKlasse 
         { 
             get { return autoklasse; } 

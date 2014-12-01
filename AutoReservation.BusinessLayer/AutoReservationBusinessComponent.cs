@@ -94,6 +94,7 @@ namespace AutoReservation.BusinessLayer
             {
                 context.Autos.Attach(auto);
                 context.Autos.Remove(auto);
+                context.SaveChanges();
                 return auto;
             }
         }
@@ -103,6 +104,7 @@ namespace AutoReservation.BusinessLayer
             {
                 context.Reservationen.Attach(reservation);
                 context.Reservationen.Remove(reservation);
+                context.SaveChanges();
                 return reservation;
             }
         }
@@ -111,7 +113,8 @@ namespace AutoReservation.BusinessLayer
             using (AutoReservationEntities context = new AutoReservationEntities())
             {
                 context.Kunden.Attach(kunde);
-                context.Kunden.Remove(kunde);
+                context.Kunden.Remove(kunde); 
+                context.SaveChanges();
                 return kunde;
             }
         }
