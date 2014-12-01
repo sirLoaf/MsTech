@@ -5,52 +5,123 @@ using System.Text;
 namespace AutoReservation.Common.DataTransferObjects
 {
     [DataContract]
-    public class AutoDto //: DtoBase
+    public class AutoDto : DtoBase
     {
+        private int basistarif;
+        private int id;
+        private string marke;
+        private int tagestarif;
+        private AutoKlasse autoklasse;
 
-        //public override string Validate()
-        //{
-        //    StringBuilder error = new StringBuilder();
-        //    if (string.IsNullOrEmpty(marke))
-        //    {
-        //        error.AppendLine("- Marke ist nicht gesetzt.");
-        //    }
-        //    if (tagestarif <= 0)
-        //    {
-        //        error.AppendLine("- Tagestarif muss grösser als 0 sein.");
-        //    }
-        //    if (AutoKlasse == AutoKlasse.Luxusklasse && basistarif <= 0)
-        //    {
-        //        error.AppendLine("- Basistarif eines Luxusautos muss grösser als 0 sein.");
-        //    }
+        public int Basistarif
+        {
+            get { return basistarif; }
+            set
+            {
+                if (basistarif != value)
+                {
+                    basistarif = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
-        //    if (error.Length == 0) { return null; }
+		public int Id 
+        { 
+            get { return id; } 
+            set 
+            { 
+                if (id != value) 
+                {
+                    id = value;
+                    RaisePropertyChanged(); 
+                } 
+            } 
+        }           
+        
+        public string Marke 
+        { 
+            get { return marke; } 
+            set 
+            { 
+                if (marke != value) 
+                {
+                    marke = value;
+                    RaisePropertyChanged();
+                } 
+            } 
+        }           
+        
+        public int Tagestarif 
+        { 
+            get { return tagestarif; } 
+            set 
+            { 
+                if (tagestarif != value) 
+                {
+                    tagestarif = value;
+                    RaisePropertyChanged(); 
+                } 
+            } 
+        }
+        
+        public AutoKlasse AutoKlasse 
+        { 
+            get { return autoklasse; } 
+            set 
+            { 
+                if (autoklasse != value)
+                {
+                    autoklasse = value;
+                    RaisePropertyChanged();
+                }
+            } 
+        }
 
-        //    return error.ToString();
-        //}
 
-        //public override object Clone()
-        //{
-        //    return new AutoDto
-        //    {
-        //        Id = Id,
-        //        Marke = Marke,
-        //        Tagestarif = Tagestarif,
-        //        AutoKlasse = AutoKlasse,
-        //        Basistarif = Basistarif
-        //    };
-        //}
+        public override string validate()
+        {
+            StringBuilder error = new StringBuilder();
+            if (string.IsNullOrEmpty(marke))
+            {
+                error.AppendLine("- marke ist nicht gesetzt.");
+            }
+            if (tagestarif <= 0)
+            {
+                error.AppendLine("- tagestarif muss grösser als 0 sein.");
+            }
+            if (autoklasse == AutoKlasse.LuxusKlasse && basistarif <= 0)
+            {
+                error.AppendLine("- basistarif eines luxusautos muss grösser als 0 sein.");
+            }
 
-        //public override string ToString()
-        //{
-        //    return string.Format(
-        //        "{0}; {1}; {2}; {3}; {4}",
-        //        Id,
-        //        Marke,
-        //        Tagestarif,
-        //        Basistarif,
-        //        AutoKlasse);
-        //}
+            if (error.Length == 0) { return null; }
+
+            return error.ToString();
+        }
+
+        public override object clone()
+        {
+            return new AutoDto
+            {
+                id = id,
+                marke = marke,
+                tagestarif = tagestarif,
+                autoklasse = autoklasse,
+                basistarif = basistarif
+            };
+        }
+
+        public override string tostring()
+        {
+            return string.Format(
+                "{0}; {1}; {2}; {3}; {4}",
+                id,
+                marke,
+                tagestarif,
+                basistarif,
+                autoklasse);
+        }
 
     }
 }
