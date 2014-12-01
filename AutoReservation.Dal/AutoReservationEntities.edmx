@@ -85,9 +85,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
           <Property Name="Marke" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" ConcurrencyMode="Fixed" />
-          <Property Name="AutoKlasse" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="Tagestarif" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
-          <Property Name="Basistarif" Type="Int32" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Auto" FromRole="Auto" ToRole="Reservation" />
         </EntityType>
         <EntityType Name="Kunde">
@@ -154,9 +152,11 @@
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LuxusklasseAuto" BaseType="AutoReservationModel.Auto" >
+          <Property Name="Basistarif" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="MittelklasseAuto" BaseType="AutoReservationModel.Auto" />
-        <EntityType Name="StandardAuto" BaseType="AutoReservationModel.Auto" />
+        <EntityType Name="StandardAuto" BaseType="AutoReservationModel.Auto" >
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -167,9 +167,7 @@
             <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.Auto)">
               <MappingFragment StoreEntitySet="Auto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Basistarif" ColumnName="Basistarif" />
                 <ScalarProperty Name="Tagestarif" ColumnName="Tagestarif" />
-                <ScalarProperty Name="AutoKlasse" ColumnName="AutoKlasse" />
                 <ScalarProperty Name="Marke" ColumnName="Marke" />
               </MappingFragment>
             </EntityTypeMapping>

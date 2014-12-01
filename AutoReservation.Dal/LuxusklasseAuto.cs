@@ -14,5 +14,6 @@ namespace AutoReservation.Dal
     
     public partial class LuxusklasseAuto : Auto
     {
+        public string Basistarif { get; set; }
     }
 }
