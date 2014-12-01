@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using AutoReservation.Common.DataTransferObjects;
+using System.Text;
+using System.Threading.Tasks; 
 
 namespace AutoReservation.Common.Interfaces
 {
@@ -23,7 +25,7 @@ namespace AutoReservation.Common.Interfaces
         List<ReservationDto> getReservationen();
 
         AutoDto getAuto(int index);
-        KundeDto getKunder(int index);
+        KundeDto getKunde(int index);
         ReservationDto getReservation(int index);
     }
 }
