@@ -140,7 +140,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationEntities context = new AutoReservationEntities())
             {
-                Reservation reservation = context.Reservationen.SingleOrDefault(r => r.Id == index);
+                Reservation reservation = context.Reservationen.SingleOrDefault(r => r.ReservationNr == index);
                 return reservation;
             }
         }

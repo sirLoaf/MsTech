@@ -8,5 +8,7 @@ namespace AutoReservation.Ui
         {
             InitializeComponent();
         }
+
+        
     }
 }

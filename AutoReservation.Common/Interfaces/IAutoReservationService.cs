@@ -10,25 +10,28 @@ namespace AutoReservation.Common.Interfaces
     public interface IAutoReservationService
     {
         [OperationContract]
+        [FaultContract(typeof(AutoDto))] 
         void UpdateAuto(AutoDto modified, AutoDto original);
         [OperationContract]
+        [FaultContract(typeof(KundeDto))] 
         void UpdateKunde(KundeDto modified, KundeDto original);
         [OperationContract]
+        [FaultContract(typeof(ReservationDto))] 
         void UpdateReservation(ReservationDto modified, ReservationDto original);
 
         [OperationContract]
-        AutoDto insertAuto(AutoDto auto);
+        AutoDto InsertAuto(AutoDto auto);
         [OperationContract]
-        KundeDto insertKunde(KundeDto kunde);
+        KundeDto InsertKunde(KundeDto kunde);
         [OperationContract]
-        ReservationDto insertReservation(ReservationDto reservation);
+        ReservationDto InsertReservation(ReservationDto reservation);
 
         [OperationContract]
-        AutoDto deletAuto(AutoDto auto);
+        AutoDto DeleteAuto(AutoDto auto);
         [OperationContract]
-        KundeDto deleteKunde(KundeDto kunde);
+        KundeDto DeleteKunde(KundeDto kunde);
         [OperationContract]
-        ReservationDto deleteReservation(ReservationDto reservation);
+        ReservationDto DeleteReservation(ReservationDto reservation);
 
         [OperationContract]
         List<AutoDto> getAutos();

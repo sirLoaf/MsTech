@@ -57,37 +57,37 @@ namespace AutoReservation.Service.Wcf
             }
         }
 
-        public AutoDto insertAuto(AutoDto auto)
+        public AutoDto InsertAuto(AutoDto auto)
         {
             WriteActualMethod(); 
             return component.insertAuto(auto.ConvertToEntity()).ConvertToDto();
         }
 
-        public KundeDto insertKunde(KundeDto kunde)
+        public KundeDto InsertKunde(KundeDto kunde)
         {
             WriteActualMethod();
             return component.insertKunde(kunde.ConvertToEntity()).ConvertToDto();
         }
 
-        public ReservationDto insertReservation(ReservationDto reservation)
+        public ReservationDto InsertReservation(ReservationDto reservation)
         {
             WriteActualMethod();
             return component.insertReservation(reservation.ConvertToEntity()).ConvertToDto();
         }
 
-        public AutoDto deletAuto(AutoDto auto)
+        public AutoDto DeleteAuto(AutoDto auto)
         {
             WriteActualMethod(); 
             return component.deleteAuto(auto.ConvertToEntity()).ConvertToDto();
         }
 
-        public KundeDto deleteKunde(KundeDto kunde)
+        public KundeDto DeleteKunde(KundeDto kunde)
         {
             WriteActualMethod(); 
             return component.deleteKunde(kunde.ConvertToEntity()).ConvertToDto();
         }
 
-        public ReservationDto deleteReservation(ReservationDto reservation)
+        public ReservationDto DeleteReservation(ReservationDto reservation)
         {
             WriteActualMethod(); 
             return component.deleteReservation(reservation.ConvertToEntity()).ConvertToDto();

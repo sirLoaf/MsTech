@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AutoReservationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AutoReservationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="Id" />
@@ -75,7 +75,8 @@
             <End Role="Reservation" EntitySet="Reservation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoReservationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -152,11 +153,10 @@
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="LuxusklasseAuto" BaseType="AutoReservationModel.Auto" >
-          <Property Name="Basistarif" Type="String" Nullable="false" />
+          <Property Name="Basistarif" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="MittelklasseAuto" BaseType="AutoReservationModel.Auto" />
-        <EntityType Name="StandardAuto" BaseType="AutoReservationModel.Auto" >
-        </EntityType>
+        <EntityType Name="StandardklasseAuto" BaseType="AutoReservationModel.Auto" />
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -164,11 +164,30 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AutoReservationModelStoreContainer" CdmEntityContainer="AutoReservationEntities">
           <EntitySetMapping Name="Autos">
-            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.Auto)">
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.LuxusklasseAuto)">
               <MappingFragment StoreEntitySet="Auto">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Basistarif" ColumnName="Basistarif" />
+                <Condition ColumnName="AutoKlasse" Value="2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.MittelklasseAuto)">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="AutoKlasse" Value="1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.StandardklasseAuto)">
+              <MappingFragment StoreEntitySet="Auto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <Condition ColumnName="AutoKlasse" Value="0" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(AutoReservationModel.Auto)">
+              <MappingFragment StoreEntitySet="Auto">
                 <ScalarProperty Name="Tagestarif" ColumnName="Tagestarif" />
                 <ScalarProperty Name="Marke" ColumnName="Marke" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

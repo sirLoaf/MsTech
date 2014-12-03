@@ -16,11 +16,15 @@
     <Grid>
         <TabControl>
             <TabItem Header="Autos">
-                <Views:AutoView x:Name="avAutoView"/>
+                <Views:AutoView x:Name="avAutoView" />
             </TabItem>
             <TabItem Header="Kunden">
                 <Views:KundeView x:Name="kvKundenView"/>
             </TabItem>
+            <TabItem Header="Reservation">
+                <Views:ReservationView x:Name="rvReservationView" />
+            </TabItem>
+
         </TabControl>
     </Grid>
 </Window>
