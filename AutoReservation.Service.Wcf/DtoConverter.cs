@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Dal;
+using AutoReservation.Common.DataTransferObjects;
 
 namespace AutoReservation.Service.Wcf
 {

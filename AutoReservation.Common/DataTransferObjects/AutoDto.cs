@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Text;
 
 namespace AutoReservation.Common.DataTransferObjects
@@ -80,7 +79,7 @@ namespace AutoReservation.Common.DataTransferObjects
         }
 
 
-        public override string validate()
+        public override string Validate()
         {
             StringBuilder error = new StringBuilder();
             if (string.IsNullOrEmpty(marke))
@@ -101,7 +100,7 @@ namespace AutoReservation.Common.DataTransferObjects
             return error.ToString();
         }
 
-        public override object clone()
+        public override object Clone()
         {
             return new AutoDto
             {
@@ -113,7 +112,7 @@ namespace AutoReservation.Common.DataTransferObjects
             };
         }
 
-        public override string tostring()
+        public override string ToString()
         {
             return string.Format(
                 "{0}; {1}; {2}; {3}; {4}",
