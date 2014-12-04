@@ -4,6 +4,7 @@ using System.Diagnostics;
 namespace AutoReservation.Service.Wcf
 {
     public class AutoReservationService
+
     {
         private static void WriteActualMethod()
         {
