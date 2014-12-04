@@ -32,7 +32,7 @@ namespace AutoReservation.BusinessLayer.Testing
         [TestMethod]
         public void UpdateAutoTest()
         {
-            StandardAuto auto = new StandardAuto 
+            StandardklasseAuto auto = new StandardklasseAuto 
             { 
                 Marke = "Lada", 
                 Tagestarif = 10 

@@ -4,41 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AutoReservationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="AutoReservationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
         <EntityType Name="Auto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Marke" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="AutoKlasse" Type="int" Nullable="false" />
-          <Property Name="Tagestarif" Type="int" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Marke" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="AutoKlasse" Nullable="false" Type="int" />
+          <Property Name="Tagestarif" Nullable="false" Type="int" />
           <Property Name="Basistarif" Type="int" />
         </EntityType>
         <EntityType Name="Kunde">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nachname" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Vorname" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Geburtsdatum" Type="datetime" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="Nachname" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="Vorname" Nullable="false" MaxLength="20" Type="nvarchar" />
+          <Property Name="Geburtsdatum" Nullable="false" Type="datetime" />
         </EntityType>
         <EntityType Name="Reservation">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AutoId" Type="int" Nullable="false" />
-          <Property Name="KundeId" Type="int" Nullable="false" />
-          <Property Name="Von" Type="datetime" Nullable="false" />
-          <Property Name="Bis" Type="datetime" Nullable="false" />
+          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="AutoId" Nullable="false" Type="int" />
+          <Property Name="KundeId" Nullable="false" Type="int" />
+          <Property Name="Von" Nullable="false" Type="datetime" />
+          <Property Name="Bis" Nullable="false" Type="datetime" />
         </EntityType>
         <Association Name="FK_Reservation_Auto">
-          <End Role="Auto" Type="Self.Auto" Multiplicity="1">
+          <End Type="Self.Auto" Multiplicity="1" Role="Auto">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <End Type="Self.Reservation" Multiplicity="*" Role="Reservation" />
           <ReferentialConstraint>
             <Principal Role="Auto">
               <PropertyRef Name="Id" />
@@ -49,10 +49,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Reservation_Kunde">
-          <End Role="Kunde" Type="Self.Kunde" Multiplicity="1">
+          <End Type="Self.Kunde" Multiplicity="1" Role="Kunde">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <End Type="Self.Reservation" Multiplicity="*" Role="Reservation" />
           <ReferentialConstraint>
             <Principal Role="Kunde">
               <PropertyRef Name="Id" />
@@ -67,12 +67,12 @@
           <EntitySet Name="Kunde" EntityType="Self.Kunde" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Reservation_Auto" Association="Self.FK_Reservation_Auto">
-            <End Role="Auto" EntitySet="Auto" />
-            <End Role="Reservation" EntitySet="Reservation" />
+            <End EntitySet="Auto" Role="Auto" />
+            <End EntitySet="Reservation" Role="Reservation" />
           </AssociationSet>
           <AssociationSet Name="FK_Reservation_Kunde" Association="Self.FK_Reservation_Kunde">
-            <End Role="Kunde" EntitySet="Kunde" />
-            <End Role="Reservation" EntitySet="Reservation" />
+            <End EntitySet="Kunde" Role="Kunde" />
+            <End EntitySet="Reservation" Role="Reservation" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -80,11 +80,11 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AutoReservationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Auto">
+        <EntityType Name="Auto" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
+          <Property Name="Id" Nullable="false" ConcurrencyMode="Fixed" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="Marke" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" ConcurrencyMode="Fixed" />
           <Property Name="Tagestarif" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Reservation" Relationship="Self.FK_Reservation_Auto" FromRole="Auto" ToRole="Reservation" />
@@ -104,8 +104,8 @@
             <PropertyRef Name="ReservationNr" />
           </Key>
           <Property Name="ReservationNr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ConcurrencyMode="Fixed" />
-          <Property Name="AutoId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
-          <Property Name="KundeId" Type="Int32" Nullable="false" ConcurrencyMode="Fixed" />
+          <Property Name="AutoId" Nullable="false" ConcurrencyMode="Fixed" Type="Int32" />
+          <Property Name="KundeId" Nullable="false" ConcurrencyMode="Fixed" Type="Int32" />
           <Property Name="Von" Type="DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
           <Property Name="Bis" Type="DateTime" Nullable="false" Precision="3" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Auto" Relationship="Self.FK_Reservation_Auto" FromRole="Reservation" ToRole="Auto" />

@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="AutoReservation.Ui.Views.ReservationView" 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-    xmlns:System="clr-namespace:System;assembly=mscorlib" 
-    xmlns:Common="clr-namespace:AutoReservation.Common.DataTransferObjects;assembly=AutoReservation.Common" 
-    xmlns:Converters="clr-namespace:AutoReservation.Ui.Converters" 
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:Common="clr-namespace:AutoReservation.Common.DataTransferObjects;assembly=AutoReservation.Common"
+    xmlns:Converters="clr-namespace:AutoReservation.Ui.Converters"
     xmlns:ViewModels="clr-namespace:AutoReservation.Ui.ViewModels">
     <UserControl.DataContext>
         <ViewModels:ReservationViewModel />
