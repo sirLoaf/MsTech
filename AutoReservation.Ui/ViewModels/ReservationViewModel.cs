@@ -146,7 +146,7 @@ namespace AutoReservation.Ui.ViewModels
             {
                 if (reservation.ReservationNr == default(int))
                 {
-                    Service.insertReservation(reservation);
+                    Service.InsertReservation(reservation);
                 }
                 else
                 {
