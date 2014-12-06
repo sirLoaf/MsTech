@@ -1,8 +1,10 @@
 ﻿using AutoReservation.Common.DataTransferObjects;
+using System;
 using System.Collections.Generic;
-using System.ServiceModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ServiceModel;
 
 namespace AutoReservation.Common.Interfaces
 {
@@ -10,13 +12,12 @@ namespace AutoReservation.Common.Interfaces
     public interface IAutoReservationService
     {
         [OperationContract]
-        [FaultContract(typeof(AutoDto))] 
+        [FaultContract(typeof(FaultException))] 
         void UpdateAuto(AutoDto modified, AutoDto original);
         [OperationContract]
-        [FaultContract(typeof(KundeDto))] 
+        [FaultContract(typeof(AutoDto))] 
         void UpdateKunde(KundeDto modified, KundeDto original);
         [OperationContract]
-        [FaultContract(typeof(ReservationDto))] 
         void UpdateReservation(ReservationDto modified, ReservationDto original);
 
         [OperationContract]

@@ -7,6 +7,7 @@
     xmlns:ViewModels="clr-namespace:AutoReservation.Ui.ViewModels">
     <UserControl.DataContext>
         <ViewModels:ReservationViewModel />
+        
     </UserControl.DataContext>
     <UserControl.Resources>
         <Converters:BasistarifVisibilityConverter x:Key="BasistarifVisibilityConverter" />

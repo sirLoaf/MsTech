@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using AutoReservation.Common.DataTransferObjects;
+using System.Threading.Tasks;
 
 namespace AutoReservation.Ui.ViewModels
 {
@@ -62,7 +63,7 @@ namespace AutoReservation.Ui.ViewModels
         {
             Kunden.Clear();
             kundenOriginal.Clear();
-            foreach (KundeDto kunde in Service.Kunden)
+            foreach (KundeDto kunde in Kunden)
             {
                 Kunden.Add(kunde);
                 kundenOriginal.Add((KundeDto)kunde.Clone());

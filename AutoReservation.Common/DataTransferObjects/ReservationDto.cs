@@ -13,7 +13,7 @@ namespace AutoReservation.Common.DataTransferObjects
         private KundeDto kunde;
         private int reservationsNr;
 
-
+        [DataMember] 
         public DateTime Von
         {
             get { return von; }
@@ -26,7 +26,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
-
+        [DataMember]
         public DateTime Bis
         {
             get { return bis; }
@@ -39,6 +39,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
+        [DataMember]
         public AutoDto Auto
         {
             get { return auto; }
@@ -51,6 +52,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
+        [DataMember]
         public KundeDto Kunde
         {
             get { return kunde; }
@@ -63,6 +65,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
+        [DataMember]
         public int ReservationNr
         {
             get { return reservationsNr; }
@@ -75,6 +78,7 @@ namespace AutoReservation.Common.DataTransferObjects
                 }
             }
         }
+        
         public override string Validate()
         {
             StringBuilder error = new StringBuilder();
