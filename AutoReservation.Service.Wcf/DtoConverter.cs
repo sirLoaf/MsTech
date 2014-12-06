@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoReservation.Common.DataTransferObjects;
 using AutoReservation.Dal;
+using AutoReservation.Common.DataTransferObjects;
 
 namespace AutoReservation.Service.Wcf
 {
@@ -11,7 +11,7 @@ namespace AutoReservation.Service.Wcf
         #region Auto
         private static Auto GetAutoInstance(AutoDto dto)
         {
-            if (dto.AutoKlasse == AutoKlasse.Standard) { return new StandardAuto(); }
+            if (dto.AutoKlasse == AutoKlasse.Standard) { return new StandardklasseAuto(); }
             if (dto.AutoKlasse == AutoKlasse.Mittelklasse) { return new MittelklasseAuto(); }
             if (dto.AutoKlasse == AutoKlasse.Luxusklasse) { return new LuxusklasseAuto(); }
             throw new NotImplementedException("Unknown AutoDto implementation.");
@@ -42,7 +42,7 @@ namespace AutoReservation.Service.Wcf
                 Tagestarif = auto.Tagestarif,
             };
 
-            if (auto is StandardAuto) { dto.AutoKlasse = AutoKlasse.Standard; }
+            if (auto is StandardklasseAuto) { dto.AutoKlasse = AutoKlasse.Standard; }
             if (auto is MittelklasseAuto) { dto.AutoKlasse = AutoKlasse.Mittelklasse; }
             if (auto is LuxusklasseAuto)
             {
