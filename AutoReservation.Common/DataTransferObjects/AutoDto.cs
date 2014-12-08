@@ -7,6 +7,7 @@ namespace AutoReservation.Common.DataTransferObjects
     public class AutoDto : DtoBase
     {
         private int basistarif;
+
         private int id;
         private string marke;
         private int tagestarif;
