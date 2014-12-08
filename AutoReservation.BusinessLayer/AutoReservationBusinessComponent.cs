@@ -166,7 +166,7 @@ namespace AutoReservation.BusinessLayer
         {
             using (AutoReservationEntities context = new AutoReservationEntities())
             {
-                List<Reservation> reservationen = context.Reservationen.ToList();
+                List<Reservation> reservationen = context.Reservationen.Include(r => r.Auto).Include(r => r.Kunde).ToList();
                 return reservationen;
             }
 

@@ -1,17 +1,17 @@
-﻿using System; 
-using System.Diagnostics; 
-using AutoReservation.Common.Interfaces; 
-using AutoReservation.Common.DataTransferObjects; 
-using AutoReservation.BusinessLayer; 
-using System.ServiceModel; 
-using AutoReservation.Dal; 
-using System.Collections.Generic;  
+﻿using System;
+using System.Diagnostics;
+using AutoReservation.Common.Interfaces;
+using AutoReservation.Common.DataTransferObjects;
+using AutoReservation.BusinessLayer;
+using System.ServiceModel;
+using AutoReservation.Dal;
+using System.Collections.Generic;
 
 namespace AutoReservation.Service.Wcf
 {
     public class AutoReservationService : IAutoReservationService
     {
-        AutoReservationBusinessComponent component = new AutoReservationBusinessComponent(); 
+        AutoReservationBusinessComponent component = new AutoReservationBusinessComponent();
 
         private static void WriteActualMethod()
         {
@@ -20,16 +20,18 @@ namespace AutoReservation.Service.Wcf
 
         public void UpdateAuto(AutoDto modified, AutoDto original)
         {
-            WriteActualMethod(); 
-            try 
-            { 
-                component.updateAuto(modified.ConvertToEntity(), original.ConvertToEntity()); 
+            WriteActualMethod();
+            try
+            {
+                component.updateAuto(modified.ConvertToEntity(), original.ConvertToEntity());
             }
-            catch (LocalOptimisticConcurrencyException<Auto> e) 
-            { 
-                throw new FaultException<AutoDto>(e.MergedEntity.ConvertToDto()); 
+            catch (LocalOptimisticConcurrencyException<Auto> e)
+            {
+                throw new FaultException<AutoDto>(e.MergedEntity.ConvertToDto());
             }
         }
+
+
 
         public void UpdateKunde(KundeDto modified, KundeDto original)
         {
@@ -38,9 +40,9 @@ namespace AutoReservation.Service.Wcf
             {
                 component.updateKunde(modified.ConvertToEntity(), original.ConvertToEntity());
             }
-            catch (LocalOptimisticConcurrencyException<Auto> e)
+            catch (LocalOptimisticConcurrencyException<Kunde> e)
             {
-                throw new FaultException<AutoDto>(e.MergedEntity.ConvertToDto());
+                throw new FaultException<KundeDto>(e.MergedEntity.ConvertToDto());
             }
         }
 
@@ -49,17 +51,27 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             try
             {
-                component.updateReservation(modified.ConvertToEntity(), original.ConvertToEntity());
+                Auto automod = modified.Auto.ConvertToEntity();
+                Kunde kundemod = modified.Kunde.ConvertToEntity();
+                Reservation mod = modified.ConvertToEntity();
+                mod.Auto = automod;
+                mod.Kunde = kundemod;
+                Auto autoorg = original.Auto.ConvertToEntity();
+                Kunde kundeorg = original.Kunde.ConvertToEntity();
+                Reservation org = original.ConvertToEntity();
+                org.Auto = autoorg;
+                org.Kunde = kundeorg;
+                component.updateReservation(mod, org);
             }
-            catch (LocalOptimisticConcurrencyException<Auto> e)
+            catch (LocalOptimisticConcurrencyException<Reservation> e)
             {
-                throw new FaultException<AutoDto>(e.MergedEntity.ConvertToDto());
+                throw new FaultException<ReservationDto>(e.MergedEntity.ConvertToDto());
             }
         }
 
         public AutoDto InsertAuto(AutoDto auto)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.insertAuto(auto.ConvertToEntity()).ConvertToDto();
         }
 
@@ -72,61 +84,69 @@ namespace AutoReservation.Service.Wcf
         public ReservationDto InsertReservation(ReservationDto reservation)
         {
             WriteActualMethod();
-            return component.insertReservation(reservation.ConvertToEntity()).ConvertToDto();
+            Auto auto = reservation.Auto.ConvertToEntity();
+            Kunde kunde = reservation.Kunde.ConvertToEntity();
+            Reservation res = reservation.ConvertToEntity();
+            res.Auto = auto;
+            res.Kunde = kunde;
+            return component.insertReservation(res).ConvertToDto();
         }
 
         public AutoDto DeleteAuto(AutoDto auto)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.deleteAuto(auto.ConvertToEntity()).ConvertToDto();
         }
 
         public KundeDto DeleteKunde(KundeDto kunde)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.deleteKunde(kunde.ConvertToEntity()).ConvertToDto();
         }
 
         public ReservationDto DeleteReservation(ReservationDto reservation)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.deleteReservation(reservation.ConvertToEntity()).ConvertToDto();
         }
 
         public List<AutoDto> getAutos()
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getAutos().ConvertToDtos();
         }
 
         public List<KundeDto> getKunden()
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getKunden().ConvertToDtos();
         }
 
         public List<ReservationDto> getReservationen()
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getReservationen().ConvertToDtos();
         }
 
         public AutoDto getAuto(int index)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getAuto(index).ConvertToDto();
         }
 
         public KundeDto getKunde(int index)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getKunde(index).ConvertToDto();
         }
 
         public ReservationDto getReservation(int index)
         {
-            WriteActualMethod(); 
+            WriteActualMethod();
             return component.getReservation(index).ConvertToDto();
         }
+
+
+       
     }
 }

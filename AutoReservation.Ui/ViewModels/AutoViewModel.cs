@@ -60,7 +60,7 @@ namespace AutoReservation.Ui.ViewModels
         {
             Autos.Clear();
             autosOriginal.Clear();
-            foreach (AutoDto auto in Autos)
+            foreach (AutoDto auto in Service.getAutos())
             {
                 Autos.Add(auto);
                 autosOriginal.Add((AutoDto)auto.Clone());
