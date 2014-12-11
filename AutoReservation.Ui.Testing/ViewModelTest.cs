@@ -17,19 +17,34 @@ namespace AutoReservation.Ui.Testing
         [TestMethod]
         public void AutosLoadTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            AutoViewModel autoModel = new AutoViewModel();
+            Assert.IsTrue(autoModel.LoadCommand.CanExecute(null));
+            autoModel.LoadCommand.Execute(null);
+            Assert.AreEqual("VW Golf", autoModel.Autos[1].Marke);
+            Assert.AreEqual("Audi S6", autoModel.Autos[2].Marke);
+            
         }
 
         [TestMethod]
         public void KundenLoadTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            KundeViewModel kundenModel = new KundeViewModel();
+            Assert.IsTrue(kundenModel.LoadCommand.CanExecute(null));
+            kundenModel.LoadCommand.Execute(null);
+            Assert.AreEqual("Nass", kundenModel.Kunden[0].Nachname);
+            Assert.AreEqual("Zufall", kundenModel.Kunden[3].Nachname);
         }
 
         [TestMethod]
         public void ReservationenLoadTest()
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            ReservationViewModel reservationModel = new ReservationViewModel();
+            Assert.IsTrue(reservationModel.LoadCommand.CanExecute(null));
+            reservationModel.LoadCommand.Execute(null);
+            Assert.AreEqual("Fiat Punto", reservationModel.Reservationen[0].Auto.Marke);
+            Assert.AreEqual("Beil", reservationModel.Reservationen[1].Kunde.Nachname);
+            Assert.AreEqual("Timo", reservationModel.Reservationen[1].Kunde.Vorname);
+     
         }
     }
 }
