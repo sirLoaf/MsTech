@@ -51,16 +51,16 @@ namespace AutoReservation.Service.Wcf
             WriteActualMethod();
             try
             {
-                Auto automod = modified.Auto.ConvertToEntity();
-                Kunde kundemod = modified.Kunde.ConvertToEntity();
+                Auto auto_mod = modified.Auto.ConvertToEntity();
+                Kunde kunde_mod = modified.Kunde.ConvertToEntity();
                 Reservation mod = modified.ConvertToEntity();
-                mod.Auto = automod;
-                mod.Kunde = kundemod;
-                Auto autoorg = original.Auto.ConvertToEntity();
-                Kunde kundeorg = original.Kunde.ConvertToEntity();
+                mod.Auto = auto_mod;
+                mod.Kunde = kunde_mod;
+                Auto auto_org = original.Auto.ConvertToEntity();
+                Kunde kunde_org = original.Kunde.ConvertToEntity();
                 Reservation org = original.ConvertToEntity();
-                org.Auto = autoorg;
-                org.Kunde = kundeorg;
+                org.Auto = auto_org;
+                org.Kunde = kunde_org;
                 component.updateReservation(mod, org);
             }
             catch (LocalOptimisticConcurrencyException<Reservation> e)

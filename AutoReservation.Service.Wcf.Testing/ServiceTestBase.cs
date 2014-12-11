@@ -98,63 +98,113 @@ namespace AutoReservation.Service.Wcf.Testing
         }
 
         [TestMethod]
-        public void InsertReservationTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        public void InsertReservationTest() 
+        { 
+            AutoDto auto = Target.getAuto(2); 
+            KundeDto kunde = Target.getKunde(1); 
+            ReservationDto reservation = new ReservationDto 
+            { 
+                Von = new DateTime(1999, 8, 1), 
+                Bis = new DateTime(1999, 8, 25), 
+                Auto = auto, 
+                Kunde = kunde 
+            }; 
+            ReservationDto newReservation = Target.InsertReservation(reservation); 
+            Assert.AreEqual("VW Golf", newReservation.Auto.Marke); 
+            Assert.AreEqual(4, newReservation.ReservationNr);
         }
-
         [TestMethod]
-        public void UpdateAutoTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        public void UpdateAutoTest() 
+        { 
+            AutoDto original = Target.getAuto(1); 
+            AutoDto modified = Target.getAuto(1); 
+            modified.Marke = "Seat"; 
+            Target.UpdateAuto(modified, original); 
+            AutoDto updatedAuto = Target.getAuto(1); 
+            Assert.AreEqual("Seat", updatedAuto.Marke); 
         }
-
         [TestMethod]
-        public void UpdateKundeTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        public void UpdateKundeTest() 
+        { 
+            KundeDto original = Target.getKunde(1); 
+            KundeDto modified = Target.getKunde(1); 
+            modified.Nachname = "Müller"; 
+            Target.UpdateKunde(modified, original); 
+            KundeDto updatedKunde = Target.getKunde(1); 
+            Assert.AreEqual("Müller", updatedKunde.Nachname); 
         }
-
         [TestMethod]
-        public void UpdateReservationTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        public void UpdateReservationTest() 
+        { 
+            ReservationDto original = Target.getReservation(1); 
+            ReservationDto modified = Target.getReservation(1); 
+            modified.Auto = Target.getAuto(2); 
+            Target.UpdateReservation(modified, original); 
+            ReservationDto updatedReservation = Target.getReservation(1); 
+            Assert.AreEqual("VW Golf", updatedReservation.Auto.Marke);
         }
-
         [TestMethod]
-        public void UpdateAutoTestWithOptimisticConcurrency()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
-        }
+        [ExpectedException(typeof(FaultException<AutoDto>))]
+        public void UpdateAutoTestWithOptimisticConcurrency() 
+        { 
+            AutoDto original = Target.getAuto(1); 
+            AutoDto modified = Target.getAuto(1); 
 
+            original.Marke = "Nissan"; 
+            modified.Marke = "Volvo"; 
+
+            Target.UpdateAuto(modified, original); 
+        }
         [TestMethod]
-        public void UpdateKundeTestWithOptimisticConcurrency()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        [ExpectedException(typeof(FaultException<KundeDto>))]
+        public void UpdateKundeTestWithOptimisticConcurrency() 
+        { 
+            KundeDto original = Target.getKunde(1); 
+            KundeDto modified = Target.getKunde(1); 
+            original.Nachname = "Tanner"; 
+            modified.Nachname = "Hugentobler"; 
+            Target.UpdateKunde(modified, original); 
         }
-
         [TestMethod]
-        public void UpdateReservationTestWithOptimisticConcurrency()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        [ExpectedException(typeof(FaultException<ReservationDto>))]
+        public void UpdateReservationTestWithOptimisticConcurrency() 
+        { 
+            ReservationDto original = Target.getReservation(1); 
+            ReservationDto modified = Target.getReservation(1); 
+            original.Auto = Target.getAuto(3); 
+            modified.Auto = Target.getAuto(2); 
+            Target.UpdateReservation(modified, original); 
         }
-
         [TestMethod]
-        public void DeleteKundeTest()
+        public void DeleteKundeTest() 
         {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+            KundeDto newkunde = new KundeDto 
+            { 
+                Nachname = "Laib",
+                Vorname = "Fabio", 
+                Geburtsdatum = new DateTime(1988, 2, 9) 
+            }; 
+            KundeDto kunde = Target.InsertKunde(newkunde); 
+            var count = Target.getKunden().Count; 
+            KundeDto del = Target.DeleteKunde(kunde); 
+            Assert.AreEqual("Laib", del.Nachname); 
+            Assert.AreEqual(count, Target.getKunden().Count + 1); 
         }
-
         [TestMethod]
         public void DeleteAutoTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        { 
+            AutoDto auto = Target.getAuto(2); 
+            AutoDto del = Target.DeleteAuto(auto); 
+            Assert.AreEqual("VW Golf", del.Marke); 
+            Assert.IsNull(Target.getAuto(2)); 
         }
-
         [TestMethod]
-        public void DeleteReservationTest()
-        {
-            Assert.Inconclusive("Test wurde noch nicht implementiert!");
+        public void DeleteReservationTest() 
+        { 
+            ReservationDto reservation = Target.getReservation(2); 
+            ReservationDto del = Target.DeleteReservation(reservation); 
+            Assert.AreEqual("20.01.2020 00:00:00", del.Bis.ToString()); 
+            Assert.IsNull(Target.getReservation(2)); 
         }
     }
 }
